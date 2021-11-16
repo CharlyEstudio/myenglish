@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class SessionController {
+  FirebaseAuth auth = FirebaseAuth.instance;
+
   BuildContext? context;
   TextEditingController emailController = TextEditingController();
   TextEditingController nameController = TextEditingController();
@@ -25,29 +28,40 @@ class SessionController {
     String email = emailController.text.trim();
     String password = passwordController.text.trim();
 
-    print('EMAIL: $email');
-    print('PASSWORD: $password');
+    try {
+      var signIn =
+          auth.signInWithEmailAndPassword(email: email, password: password);
 
-    goToHomePage(context);
+      if (signIn != null) {
+        goToHomePage(context);
+      }
+    } catch (e) {
+      print(e);
+    }
   }
 
   void goToHomePage(BuildContext context) {
     Navigator.pushNamed(context, 'home');
   }
 
-  void register() {
+  void register(BuildContext context) {
     String email = emailController.text.trim();
-    String name = nameController.text.trim();
-    String lastName = lastNameController.text.trim();
-    String telephone = telephoneController.text.trim();
     String password = passwordController.text.trim();
-    String confirmPassword = confirmPasswordController.text.trim();
 
-    print('EMAIL: $email');
-    print('NAME: $name');
-    print('LAST NAME: $lastName');
-    print('TELEPHONE: $telephone');
-    print('PASSWORD: $password');
-    print('CONFIRM PASSWORD: $confirmPassword');
+    try {
+      var newUser =
+          auth.createUserWithEmailAndPassword(email: email, password: password);
+
+      if (newUser != null) {
+        goToHomePage(context);
+      }
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  void signOut(BuildContext context) {
+    auth.signOut();
+    goToLoginPage(context);
   }
 }

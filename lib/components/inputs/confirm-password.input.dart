@@ -9,7 +9,7 @@ Widget confirmPasswordInput(SessionController cont) {
         color: MyColors.primaryOpacityColor,
         borderRadius: BorderRadius.circular(30.0)),
     child: TextField(
-      controller: cont.passwordController,
+      controller: cont.confirmPasswordController,
       obscureText: true,
       decoration: InputDecoration(
           hintText: 'Confirmar Contraseña',

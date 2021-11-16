@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:lottie/lottie.dart';
-import 'package:myenglish/components/inputs/confirm-password.input.dart';
-import 'package:myenglish/components/inputs/lastname.input.dart';
-import 'package:myenglish/components/inputs/name.input.dart';
+import 'package:myenglish/components/inputs/email.input.dart';
 import 'package:myenglish/components/inputs/password.input.dart';
 import 'package:myenglish/controllers/sesions.controller.dart';
 import 'package:myenglish/utils/my_colors.dart';
@@ -36,14 +34,12 @@ class _RegisterPageState extends State<RegisterPage> {
           child: Column(
             children: <Widget>[
               Container(
-                margin: const EdgeInsets.only(top: 90.0, bottom: 20.0),
+                margin: const EdgeInsets.only(top: 140.0, bottom: 20.0),
                 width: 250.0,
                 child: Lottie.asset('assets/json/register.json'),
               ),
-              nameInput(_cont),
-              lastNameInput(_cont),
+              emailInput(_cont),
               passwordInput(_cont),
-              confirmPasswordInput(_cont),
               _buttonRegister(),
               _buttonCancel()
             ],
@@ -59,7 +55,7 @@ class _RegisterPageState extends State<RegisterPage> {
       margin: const EdgeInsets.only(top: 20.0, left: 50.0, right: 50.0),
       child: ElevatedButton(
         onPressed: () {
-          _cont.login(context);
+          _cont.register(context);
         },
         child: const Text('Registrarse'),
         style: ElevatedButton.styleFrom(
